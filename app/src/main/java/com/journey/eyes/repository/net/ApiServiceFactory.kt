@@ -1,10 +1,14 @@
 package com.journey.eyes.repository.net
 
 import android.os.Build
+import com.journey.eyes.BuildConfig
 import com.journey.eyes.utils.AppUtils
 import com.journey.eyes.utils.ext.logV
 import okhttp3.Interceptor
+import okhttp3.OkHttpClient
 import okhttp3.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 
 /**
@@ -12,7 +16,20 @@ import java.util.*
  * @Description
  */
 object ApiServiceFactory {
-    const val TAG = "LoggerInterceptor"
+    private const val TAG = "LoggerInterceptor"
+    private const val baseUrl = BuildConfig.BASE_URL
+    private val httpClient = OkHttpClient.Builder()
+        .addInterceptor(LoggerInterceptor())
+        .addInterceptor(HeaderInterceptor())
+        .addInterceptor(BasicParamsInterceptor())
+        .build()
+
+    private val retrofit = Retrofit.Builder()
+        .baseUrl(baseUrl)
+        .client(httpClient)
+        .addConverterFactory(GsonConverterFactory.create())
+
+
     class LoggerInterceptor:Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response {
             val request  = chain.request()
@@ -44,9 +61,9 @@ object ApiServiceFactory {
                 addQueryParameter("vc", AppUtils.eyeVersionCode.toString())
                 addQueryParameter("vn", AppUtils.eyeVersionName)
                 addQueryParameter("size", AppUtils.getScreenPixel())
-//                addQueryParameter("deviceModel", GlobalUtil.deviceModel)
-//                addQueryParameter("first_channel", GlobalUtil.deviceBrand)
-//                addQueryParameter("last_channel", GlobalUtil.deviceBrand)
+                addQueryParameter("deviceModel", AppUtils.deviceModel)
+                addQueryParameter("first_channel", AppUtils.deviceBrand)
+                addQueryParameter("last_channel", AppUtils.deviceBrand)
                 addQueryParameter("system_version_code", "${Build.VERSION.SDK_INT}")
             }.build()
             val request = originalRequest.newBuilder().url(url).method(originalRequest.method(), originalRequest.body()).build()

@@ -3,6 +3,7 @@ package com.journey.eyes.utils
 import android.annotation.SuppressLint
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.os.Build
 import android.provider.Settings
 import android.text.TextUtils
 import com.journey.eyes.EyeApplication
@@ -30,6 +31,24 @@ object AppUtils {
             return "${widthPixels}X${heightPixels}"
         }
     }
+
+    val deviceModel: String
+        get() {
+            var deviceModel = Build.MODEL
+            if (TextUtils.isEmpty(deviceModel)) {
+                deviceModel = "unknown"
+            }
+            return deviceModel
+        }
+
+    val deviceBrand: String
+        get() {
+            var deviceBrand = Build.BRAND
+            if (TextUtils.isEmpty(deviceBrand)) {
+                deviceBrand = "unknown"
+            }
+            return deviceBrand.toLowerCase(Locale.getDefault())
+        }
 
     @SuppressLint("HardwareIds")
     fun getDeviceSerial(): String {
