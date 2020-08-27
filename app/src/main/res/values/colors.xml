@@ -9,4 +9,5 @@
     <color name="textColorSecondary">#6B7178</color>
     <color name="textColorThird">#9297A2</color>
     <color name="gray">#ededed</color>
+    <color name="colorTextPrimary">#444444</color>
 </resources>

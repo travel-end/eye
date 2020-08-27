@@ -23,4 +23,6 @@ abstract class BaseVMFragment<VM:BaseViewModel>:BaseFragment() {
         mViewModel = ViewModelProvider(this,BaseViewModelFactory(mViewModel)).get(viewModelClass())
     }
 
+
+
 }

@@ -2,6 +2,7 @@ package com.journey.eyes.repository.net
 
 import android.os.Build
 import com.journey.eyes.BuildConfig
+import com.journey.eyes.repository.api.ApiService
 import com.journey.eyes.utils.AppUtils
 import com.journey.eyes.utils.ext.logV
 import okhttp3.Interceptor
@@ -28,6 +29,9 @@ object ApiServiceFactory {
         .baseUrl(baseUrl)
         .client(httpClient)
         .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    val apiService = retrofit.create(ApiService::class.java)
 
 
     class LoggerInterceptor:Interceptor {
