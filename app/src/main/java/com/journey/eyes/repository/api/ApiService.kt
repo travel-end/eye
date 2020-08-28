@@ -1,7 +1,7 @@
 package com.journey.eyes.repository.api
 
-import com.journey.eyes.model.commend.CommunityRecommend
-import com.journey.eyes.model.find.FindModel
+import com.journey.eyes.model.core.Discovery
+import com.journey.eyes.model.core.HomePageRecommend
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -12,8 +12,9 @@ import retrofit2.http.GET
 interface ApiService {
 
     @GET("api/v7/index/tab/discovery")
-    fun getFind() :Call<FindModel>
+    suspend fun getFind(): Call<Discovery>
 
-    @GET("api/v7/community/tab/rec")
-    fun getRecommend():Call<CommunityRecommend>
+    // http://baobab.kaiyanapp.com/api/v7/community/tab/rec
+    @GET("api/v5/index/tab/allRec?page=0")
+    fun getRecommend(): Call<HomePageRecommend>
 }

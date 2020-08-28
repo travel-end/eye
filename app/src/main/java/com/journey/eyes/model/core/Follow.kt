@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.journey.eyes.model
+package com.journey.eyes.model.core
 
 /**
  * 社区-关注列表，响应实体类。

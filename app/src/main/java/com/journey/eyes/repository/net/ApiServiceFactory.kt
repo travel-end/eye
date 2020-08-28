@@ -1,15 +1,19 @@
 package com.journey.eyes.repository.net
 
 import android.os.Build
+import com.google.gson.GsonBuilder
 import com.journey.eyes.BuildConfig
 import com.journey.eyes.repository.api.ApiService
+import com.journey.eyes.repository.callback.GsonTypeAdapterFactory
 import com.journey.eyes.utils.AppUtils
+import com.journey.eyes.utils.ext.logE
 import com.journey.eyes.utils.ext.logV
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.*
 
 /**
@@ -28,20 +32,21 @@ object ApiServiceFactory {
     private val retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
         .client(httpClient)
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(ScalarsConverterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create(GsonBuilder().registerTypeAdapterFactory(GsonTypeAdapterFactory()).create()))
         .build()
 
-    val apiService = retrofit.create(ApiService::class.java)
+    val apiService: ApiService = retrofit.create(ApiService::class.java)
 
 
     class LoggerInterceptor:Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response {
             val request  = chain.request()
             val t1 = System.nanoTime()
-            logV(TAG,"request Sending: ${request.url()} \n ${request.headers()}")
+            logE(TAG,"request Sending: ${request.url()} \n ${request.headers()}")
             val response = chain.proceed(request)
             val t2 = System.nanoTime()
-            logV(TAG, "Received response for  ${response.request().url()} in ${(t2 - t1) / 1e6} ms\n${response.headers()}")
+            logE(TAG, "Received response for  ${response.request().url()} in ${(t2 - t1) / 1e6} ms\n${response.headers()}")
             return response
         }
     }

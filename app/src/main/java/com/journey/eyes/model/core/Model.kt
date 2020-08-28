@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.journey.eyes.model
+package com.journey.eyes.model.core
 
 /**
  * 所有网络通讯数据模型实体类的基类。

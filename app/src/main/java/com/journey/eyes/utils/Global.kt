@@ -2,7 +2,9 @@ package com.journey.eyes.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.view.Gravity
 import android.view.View
+import android.widget.Toast
 import com.journey.eyes.EyeApplication
 
 /**
@@ -20,5 +22,12 @@ fun setOnClickListeners(vararg v: View, block: View.() -> Unit) {
 }
 
 fun Int.getString() = EyeApplication.instance.resources.getString(this)
+
+fun String.showToast(): Toast {
+    val toast = Toast.makeText(EyeApplication.instance, this, Toast.LENGTH_SHORT)
+    toast.setGravity(Gravity.CENTER,0,0)
+    toast.show()
+    return toast
+}
 
 

@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-package com.journey.eyes.model.find
-
-import com.journey.eyes.model.*
+package com.journey.eyes.model.core
 
 /**
- * 首页-发现列表，响应实体类。
+ * 首页-推荐列表，响应实体类。
  *
  * @author vipyinzhiwei
- * @since  2020/5/9
+ * @since  2020/5/6
  */
-data class FindModel(
+data class HomePageRecommend(
     val itemList: List<Item>,
     val count: Int,
     val total: Int,
@@ -45,13 +43,13 @@ data class FindModel(
         val ad: Boolean,
         val adTrack: Any,
         val author: Author,
-        val content: Content,
-        val autoPlay: Boolean,
+        val backgroundImage: String,
         val brandWebsiteInfo: Any,
         val campaign: Any,
         val category: String,
         val collected: Boolean,
         val consumption: Consumption,
+        val content: Content,
         val count: Int,
         val cover: Cover,
         val dataType: String,
@@ -89,114 +87,73 @@ data class FindModel(
         val promotion: Any,
         val provider: Provider,
         val reallyCollected: Boolean,
+        val refreshUrl: String,
         val releaseTime: Long,
         val remark: Any,
         val resourceType: String,
         val rightText: String,
         val searchWeight: Int,
-        val shade: Boolean,
         val shareAdTrack: Any,
+        val showHotSign: Boolean,
+        val showImmediately: Boolean,
         val slogan: Any,
-        val src: Any,
+        val src: Int,
         val subTitle: Any,
-        val subtitles: List<Any>,
+        val subtitles: List<Subtitle>,
         val switchStatus: Boolean,
         val tags: List<Tag>,
         val text: String,
         val thumbPlayUrl: Any,
         val title: String,
+        val titleList: List<String>,
         val titlePgc: Any,
+        val topicTitle: String,
         val type: String,
         val uid: Int,
         val waterMarks: Any,
         val webAdTrack: Any,
         val webUrl: WebUrl,
-        val detail: AutoPlayVideoAdDetail?
+        val detail: Discovery.AutoPlayVideoAdDetail?
     )
 
     data class Header(
         val actionUrl: String?,
         val cover: Any,
-        val font: String,
+        val description: String,
+        val font: Any,
+        val icon: String,
+        val iconType: String,
         val id: Int,
-        val label: Any,
-        val labelList: Any,
+        val label: Label?,
+        val labelList: List<Label>,
         val rightText: String,
+        val showHateVideo: Boolean,
         val subTitle: Any,
         val subTitleFont: Any,
         val textAlign: String,
-        val title: String,
-        val icon: String,
-        val description: String
+        val time: Long,
+        val title: String
     )
 
     data class ItemX(
         val adIndex: Int,
-        val `data`: DataX,
+        val `data`: DataXX,
         val id: Int,
         val tag: Any,
         val type: String
     )
 
-    data class DataX(
-        val actionUrl: String,
-        val adTrack: List<Any>,
-        val autoPlay: Boolean,
+    data class Subtitle(val type: String, val url: String)
+
+    data class DataXX(
+        val cover: Cover,
+        val dailyResource: Boolean,
         val dataType: String,
-        val description: String,
-        val header: HeaderX,
         val id: Int,
-        val image: String,
-        val label: Label?,
-        val labelList: List<Any>,
-        val shade: Boolean,
-        val title: String
-    )
-
-    data class HeaderX(
-        val actionUrl: Any,
-        val cover: Any,
-        val description: Any,
-        val font: Any,
-        val icon: Any,
-        val id: Int,
-        val label: Any,
-        val labelList: Any,
-        val rightText: Any,
-        val subTitle: Any,
-        val subTitleFont: Any,
-        val textAlign: String,
-        val title: Any
-    )
-
-    data class AutoPlayVideoAdDetail(
-        val actionUrl: String,
-        val adTrack: List<Any>,
-        val adaptiveImageUrls: String,
-        val adaptiveUrls: String,
-        val canSkip: Boolean,
-        val categoryId: Int,
-        val countdown: Boolean,
-        val cycleCount: Int,
-        val description: String,
-        val displayCount: Int,
-        val displayTimeDuration: Int,
-        val icon: String,
-        val id: Long,
-        val ifLinkage: Boolean,
-        val imageUrl: String,
-        val iosActionUrl: String,
-        val linkageAdId: Int,
-        val loadingMode: Int,
-        val openSound: Boolean,
-        val position: Int,
-        val showActionButton: Boolean,
-        val showImage: Boolean,
-        val showImageTime: Int,
-        val timeBeforeSkip: Int,
-        val title: String,
+        val nickname: String,
+        val resourceType: String,
         val url: String,
-        val videoAdType: String,
-        val videoType: String
+        val urls: List<String>,
+        val userCover: String
     )
 }

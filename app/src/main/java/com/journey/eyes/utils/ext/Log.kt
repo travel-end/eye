@@ -47,6 +47,12 @@ fun logI(tag: String= TAG, msg: String?) {
     }
 }
 
+fun logE(tag: String= TAG, msg: String?) {
+    if (level <= ERROR) {
+        Log.e(tag, msg.toString())
+    }
+}
+
 fun logW(tag: String= TAG, msg: String?, tr: Throwable? = null) {
     if (level <= WARN) {
         if (tr == null) {

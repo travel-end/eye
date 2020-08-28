@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.journey.eyes.model.commend
+package com.journey.eyes.model.core
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
@@ -124,8 +124,19 @@ data class Tag(
 data class WebUrl(val forWeibo: String, val raw: String) : Parcelable
 
 @Parcelize
-data class Cover(val blurred: String, val detail: String, val feed: String, val homepage: String?, val sharing: String?) : Parcelable
+data class Cover(
+    val blurred: String,
+    val detail: String,
+    val feed: String,
+    val homepage: String?,
+    val sharing: String?
+) : Parcelable
 
 @Parcelize
-data class Consumption(val collectionCount: Int, val realCollectionCount: Int, val replyCount: Int, val shareCount: Int) : Parcelable
+data class Consumption(
+    val collectionCount: Int,
+    val realCollectionCount: Int,
+    val replyCount: Int,
+    val shareCount: Int
+) : Parcelable
 
